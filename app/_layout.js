@@ -1,7 +1,8 @@
-import { View, Text } from 'react-native'
+import { View, Text ,Image} from 'react-native'
 import React, { useEffect } from 'react'
-import { SplashScreen, Stack } from 'expo-router'
+import { SplashScreen, Stack, Tabs } from 'expo-router'
 import { useFonts } from 'expo-font'
+import { icons } from '../constants/constants'
 SplashScreen.preventAutoHideAsync()
 
 const RootLayout = () => {
@@ -25,15 +26,65 @@ const RootLayout = () => {
     if (fontsLoaded) SplashScreen.hideAsync();
   }, [fontsLoaded, error])
   if (!fontsLoaded) return null;
+
+  const TabIcon = ({icon,color,name,focused})=>{
+    return(
+      <View>
+        <Image
+          source={icon}
+          resizeMode='contain'
+          className='w-5 h-5'
+        />
+        <Text>{name}</Text>
+      </View>
+    )
+  }
   return (
-    <Stack>
-      <Stack.Screen
+    <Tabs>
+      <Tabs.Screen 
         name='index'
         options={{
-          headerShown: false,
+          title : 'Home',
+          headerShown : false,
+          tabBarIcon : (color,focused)=>(
+            <TabIcon
+              icon={focused ? icons.home_focus : icons.home_unfocus}
+              color={color}
+              name='Home'
+              focused={focused}
+            />
+          )
         }}
       />
-    </Stack>
+      <Tabs.Screen 
+        name='find'
+        options={{
+          title : 'Find',
+          headerShown : false,
+        }}
+      />
+      <Tabs.Screen 
+        name='doctors'
+        options={{
+          title : 'Doctors',
+          headerShown : false,
+        }}
+      />
+      <Tabs.Screen 
+        name='hospitals'
+        options={{
+          title : 'Hospitals',
+          headerShown : false,
+        }}
+      />
+      <Tabs.Screen 
+        name='ambulences'
+        options={{
+          title : 'Ambulences',
+          headerShown : false,
+        }}
+      />
+    </Tabs>
   )
 }
 
