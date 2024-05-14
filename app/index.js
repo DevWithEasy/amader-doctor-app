@@ -16,7 +16,7 @@ export default function index() {
                 source={doctor_image} 
                 style={{ width: 100, height: 100 }} 
             />
-            <Text className='text-blue-500'>Dr. Abedur Rahman</Text>
+            <Text className='text-blue-500 font-pexbold'>Dr. Abedur Rahman</Text>
             <Text>Rangpur Medical Collage</Text>
         </View>
         </ScrollView>
