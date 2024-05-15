@@ -29,13 +29,14 @@ const RootLayout = () => {
 
   const TabIcon = ({icon,color,name,focused})=>{
     return(
-      <View>
+      <View
+        className='justify-center items-center'
+      >
         <Image
           source={icon}
           resizeMode='contain'
           className='w-5 h-5'
         />
-        <Text>{name}</Text>
       </View>
     )
   }
