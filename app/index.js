@@ -1,9 +1,11 @@
-import { View, Text, Image, StatusBar, ScrollView, Button, TouchableOpacity } from 'react-native'
+import { View, Text, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 const { toBengaliNumber } = require('bengali-number')
 import specializationImage from '../assets/brain.png'
 import { Link } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function Index() {
     const inset = useSafeAreaInsets()
@@ -21,6 +23,28 @@ export default function Index() {
         }
         getData()
     }, [])
+    const services = [
+        {
+            title: 'ডাক্তার খুঁজুন',
+            image: require('../assets/service_doctor.png')
+        },
+        {
+            title: 'হাসপাতাল',
+            image: require('../assets/service_hospital.png')
+        },
+        {
+            title: 'অ্যাম্বুলেন্স',
+            image: require('../assets/service_ambulance.png')
+        },
+        {
+            title: 'ব্লাড ব্যাংক',
+            image: require('../assets/service_blood_bank.png')
+        },
+        {
+            title: 'ম্যাপস',
+            image: require('../assets/service_maps.png')
+        },
+    ]
     console.log(specilaizations)
     return (
         <ScrollView
@@ -29,7 +53,87 @@ export default function Index() {
             }}
             className='bg-blue-50'
         >
-            <StatusBar />
+            <StatusBar style="light" />
+            <View
+                className='p-2'
+            >
+                <View
+                    className='flex-row bg-white rounded-md'
+                >
+                    <View
+                        className='w-7/12 p-2'
+                    >
+                        <Text
+                            className='text-lg font-hmedium text-blue-500'
+                        >
+                            খুঁজুন এবং অ্যাপয়েন্টমেন্ট নিন
+                        </Text>
+                        <View>
+                            <RNPickerSelect
+                                onValueChange={(value) => console.log(value)}
+                                items={specilaizations.map(specilaization => {
+                                    return {
+                                        label: specilaization.name,
+                                        value: specilaization._id
+                                    }
+                                })
+                                }
+                                style={{
+                                    inputAndroid : {
+                                        border : '1px solid gray'
+                                    }
+                                }}
+                            />
+                        </View>
+                    </View>
+                    <View
+                        className='w-5/12 justify-center items-center'
+                    >
+                        <Image
+                            source={require('../assets/doctor_visit.png')}
+                            className='w-[150px] h-[150px]'
+                        />
+                    </View>
+                </View>
+            </View>
+
+            <View>
+                <View
+                    className='px-2 flex-row justify-between'
+                >
+                    <Text
+                        className='font-hregular'
+                    >
+                        আমাদের সেবা সমূহ
+                    </Text>
+                </View>
+                <View
+                    className='flex flex-row flex-wrap'
+                >
+                    {
+                        services.map((service, i) =>
+                            <View
+                                key={i}
+                                className='w-4/12 p-2'
+                            >
+                                <TouchableOpacity
+                                    className='bg-white p-2 justify-center items-center space-y-2 rounded-md'
+                                >
+                                    <Image
+                                        source={service.image}
+                                        className='w-10 h-10'
+                                    />
+                                    <Text
+                                        className='font-hregular'
+                                    >
+                                        {service.title}
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    }
+                </View>
+            </View>
             <View>
                 <View
                     className='px-2 flex-row justify-between'
@@ -52,10 +156,10 @@ export default function Index() {
                     {specilaizations.length > 0 &&
                         specilaizations.map(specilaization =>
                             <View
+                                key={specilaization?._id}
                                 className='w-4/12 p-2'
                             >
                                 <TouchableOpacity
-                                    key={specilaization?._id}
                                     className='bg-white p-2 justify-center items-center space-y-2 rounded-md'
                                 >
                                     <Image
@@ -74,7 +178,9 @@ export default function Index() {
 
                 </View>
             </View>
-            <View>
+            <View
+                className='pb-10'
+            >
                 <View
                     className='px-2 pb-2 flex-row justify-between'
                 >
@@ -109,7 +215,7 @@ export default function Index() {
                                     <Text
                                         className='font-hregular bg-blue-50 px-2 text-blue-600 rounded-md'
                                     >
-                                        {toBengaliNumber(doctor?.feesPerConsultation)} -৳
+                                        {toBengaliNumber(doctor?.feesPerConsultation)}-৳
                                     </Text>
                                 </View>
 
