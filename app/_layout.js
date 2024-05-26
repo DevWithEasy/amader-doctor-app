@@ -29,8 +29,50 @@ export default function RootLayout() {
 
     return (
         <Stack>
-            <Stack.Screen 
+            <Stack.Screen
                 name='index'
+                options={{
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='ambulences'
+                options={{
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='blood'
+                options={{
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='doctors'
+                options={{
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='find'
+                options={{
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='hospitals'
+                options={{
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='signin'
+                options={{
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='signup'
                 options={{
                     headerShown: false
                 }}

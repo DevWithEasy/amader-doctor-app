@@ -1,16 +1,19 @@
-import { View, Text, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, Image, ScrollView, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-const { toBengaliNumber } = require('bengali-number')
+import { toBengaliNumber } from 'bengali-number'
 import specializationImage from '../assets/brain.png'
-import { Link } from 'expo-router'
+import { Link, useRouter } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import RNPickerSelect from 'react-native-picker-select';
+import { Picker } from '@react-native-picker/picker';
+import days from '../utils/days'
+import dayNameBangla from '../utils/dayNameBangla'
 
 export default function Index() {
     const inset = useSafeAreaInsets()
     const [doctors, setDoctors] = useState([])
     const [specilaizations, setSpecilaizations] = useState([])
+    const [specilaization, setSpecilaization] = useState([])
     useEffect(() => {
         function getData() {
             fetch(`https://amaderdoctor.onrender.com/api/doctor/home-data`)
@@ -45,15 +48,15 @@ export default function Index() {
             image: require('../assets/service_maps.png')
         },
     ]
-    console.log(specilaizations)
+    const router = useRouter()
     return (
         <ScrollView
-            style={{
-                paddingTop: inset.top
-            }}
+            // style={{
+            //     paddingTop: inset.top
+            // }}
             className='bg-blue-50'
         >
-            <StatusBar style="light" />
+            {/* <StatusBar style="light" /> */}
             <View
                 className='p-2'
             >
@@ -61,29 +64,80 @@ export default function Index() {
                     className='flex-row bg-white rounded-md'
                 >
                     <View
-                        className='w-7/12 p-2'
+                        className='w-7/12 p-2 space-y-2'
                     >
                         <Text
-                            className='text-lg font-hmedium text-blue-500'
+                            className='text-[16px] font-hmedium text-blue-500'
                         >
                             খুঁজুন এবং অ্যাপয়েন্টমেন্ট নিন
                         </Text>
-                        <View>
-                            <RNPickerSelect
-                                onValueChange={(value) => console.log(value)}
-                                items={specilaizations.map(specilaization => {
-                                    return {
-                                        label: specilaization.name,
-                                        value: specilaization._id
+                        <View
+                            className='space-y-1'
+                        >
+                            <View
+                                className='border border-gray-400 rounded'
+                            >
+                                <Picker
+                                    selectedValue={specilaization}
+                                    onValueChange={(itemValue, itemIndex) =>
+                                        setSpecilaization(itemValue)
                                     }
-                                })
-                                }
-                                style={{
-                                    inputAndroid : {
-                                        border : '1px solid gray'
+                                    style={{
+                                        height: 40,
+                                        marginTop: -10
+                                    }}
+                                >
+                                    <Picker.Item
+                                        label='অভিজ্ঞতা বাছাই করুন'
+                                    />
+                                    {
+                                        specilaizations.map(specilaization =>
+                                            <Picker.Item
+                                                key={specilaization._id}
+                                                label={specilaization.name}
+                                                value={specilaization._id}
+                                            />
+                                        )
                                     }
-                                }}
-                            />
+                                </Picker>
+                            </View>
+                            <View
+                                className='border border-gray-400 rounded'
+                            >
+                                <Picker
+                                    selectedValue={specilaization}
+                                    onValueChange={(itemValue, itemIndex) =>
+                                        setSpecilaization(itemValue)
+                                    }
+                                    style={{
+                                        height: 40,
+                                        marginTop: -10
+                                    }}
+                                >
+                                    <Picker.Item
+                                        label='বার বাছাই করুন'
+                                    />
+                                    {
+                                        days.map((day,i) =>
+                                            <Picker.Item
+                                                key={i}
+                                                label={dayNameBangla(day)}
+                                                value={day}
+                                            />
+                                        )
+                                    }
+                                </Picker>
+                            </View>
+                            <TouchableOpacity
+                                className='py-2 bg-blue-500 rounded'
+                                onPress={()=>router.push('/signup')}
+                            >
+                                <Text
+                                    className='text-white text-center'
+                                >
+                                    খুঁজুন
+                                </Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View
@@ -91,12 +145,11 @@ export default function Index() {
                     >
                         <Image
                             source={require('../assets/doctor_visit.png')}
-                            className='w-[150px] h-[150px]'
+                            className='w-[120px] h-[120px]'
                         />
                     </View>
                 </View>
             </View>
-
             <View>
                 <View
                     className='px-2 flex-row justify-between'
@@ -114,7 +167,7 @@ export default function Index() {
                         services.map((service, i) =>
                             <View
                                 key={i}
-                                className='w-4/12 p-2'
+                                className='w-4/12 p-1'
                             >
                                 <TouchableOpacity
                                     className='bg-white p-2 justify-center items-center space-y-2 rounded-md'
@@ -157,7 +210,7 @@ export default function Index() {
                         specilaizations.map(specilaization =>
                             <View
                                 key={specilaization?._id}
-                                className='w-4/12 p-2'
+                                className='w-4/12 p-1'
                             >
                                 <TouchableOpacity
                                     className='bg-white p-2 justify-center items-center space-y-2 rounded-md'
@@ -167,7 +220,7 @@ export default function Index() {
                                         className='w-10 h-10'
                                     />
                                     <Text
-                                        className='font-hregular'
+                                        className='font-hregular text-nowrap'
                                     >
                                         {specilaization?.name}
                                     </Text>
@@ -179,7 +232,7 @@ export default function Index() {
                 </View>
             </View>
             <View
-                className='pb-10'
+                className='pb-12'
             >
                 <View
                     className='px-2 pb-2 flex-row justify-between'
@@ -263,3 +316,26 @@ export default function Index() {
 
     )
 }
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 4,
+        color: 'black',
+        paddingRight: 30 // to ensure the text is never behind the icon
+    },
+    inputAndroid: {
+        fontSize: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        borderWidth: 0.5,
+        borderColor: 'purple',
+        borderRadius: 8,
+        color: 'black',
+        paddingRight: 30 // to ensure the text is never behind the icon
+    }
+});
