@@ -8,15 +8,15 @@ export default function SpecilaizationArea({ specilaizations }) {
     return (
         <View>
             <View
-                className='px-2 flex-row justify-between'
+                className='px-2 pt-2 flex-row justify-between'
             >
                 <Text
-                    className='font-hregular'
+                    className='font-hmedium'
                 >
                     বিভাগ সমূহ
                 </Text>
                 <Link
-                    href=''
+                    href='/specializations'
                     className='font-hregular text-blue-500 items-center'
                 >
                     আরো বিভাগ

@@ -10,15 +10,15 @@ export default function DoctorsArea({ doctors }) {
             className='pb-12'
         >
             <View
-                className='px-2 pb-2 flex-row justify-between'
+                className='px-2 py-2 flex-row justify-between'
             >
                 <Text
-                    className='font-hregular'
+                    className='font-hmedium'
                 >
                     জনপ্রিয় ডাক্তারগণ
                 </Text>
                 <Link
-                    href=''
+                    href='/doctors'
                     className='font-hregular text-blue-500 items-center'
                 >
                     আরো ডাক্তারগণ

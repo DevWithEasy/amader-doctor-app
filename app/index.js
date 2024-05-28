@@ -41,32 +41,6 @@ export default function Index() {
                 className='bg-blue-50'
             >
                 <StatusBar style="auto" />
-                <View
-                    className='p-2'
-                >
-                    <View
-                        className='flex-row bg-white rounded-md'
-                    >
-                        <View
-                            className='w-7/12 p-2 space-y-2'
-                        >
-                            <Text
-                                className='text-[16px] font-hmedium text-blue-500'
-                            >
-                                খুঁজুন এবং অ্যাপয়েন্টমেন্ট নিন
-                            </Text>
-                            <Search {...{ specilaizations }} />
-                        </View>
-                        <View
-                            className='w-5/12 justify-center items-center'
-                        >
-                            <Image
-                                source={require('../assets/doctor_visit.png')}
-                                className='w-[120px] h-[120px]'
-                            />
-                        </View>
-                    </View>
-                </View>
                 <HeroArea/>
                 <ServicesArea />
                 <SpecilaizationArea {...{

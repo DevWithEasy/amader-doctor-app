@@ -37,7 +37,7 @@ export default function ServicesArea() {
                 className='px-2 flex-row justify-between'
             >
                 <Text
-                    className='font-hregular'
+                    className='font-hmedium'
                 >
                     আমাদের সেবা সমূহ
                 </Text>
