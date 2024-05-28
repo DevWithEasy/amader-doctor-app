@@ -5,7 +5,7 @@ import { toBengaliNumber } from 'bengali-number'
 import specializationImage from '../assets/brain.png'
 import { Link, useRouter } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { Picker } from '@react-native-picker/picker';
+import {Picker} from '@react-native-picker/picker';
 import days from '../utils/days'
 import dayNameBangla from '../utils/dayNameBangla'
 
@@ -130,7 +130,7 @@ export default function Index() {
                             </View>
                             <TouchableOpacity
                                 className='py-2 bg-blue-500 rounded'
-                                onPress={()=>router.push('/doctor/1/')}
+                                onPress={()=>router.push('/user/1/')}
                             >
                                 <Text
                                     className='text-white text-center'

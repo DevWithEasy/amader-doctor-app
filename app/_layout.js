@@ -90,6 +90,12 @@ export default function RootLayout() {
                     headerShown: false
                 }}
             />
+            <Stack.Screen
+                name='doctor/[id]'
+                options={{
+                    headerShown: false
+                }}
+            />
         </Stack>
     )
 }
