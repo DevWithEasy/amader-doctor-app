@@ -32,7 +32,7 @@ export default function RootLayout() {
             <Stack.Screen
                 name='index'
                 options={{
-                    // headerShown: false
+                    headerShown: false
                 }}
             />
             <Stack.Screen
@@ -55,7 +55,7 @@ export default function RootLayout() {
                 }}
             />
             <Stack.Screen
-                name='doctors'
+                name='doctors/index'
                 options={{
                     // headerShown: false
                 }}
@@ -67,7 +67,13 @@ export default function RootLayout() {
                 }}
             />
             <Stack.Screen
-                name='hospitals'
+                name='maps'
+                options={{
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='hospitals/index'
                 options={{
                     // headerShown: false
                 }}
