@@ -7,7 +7,7 @@ export default function DoctorsArea({ doctors }) {
     const router = useRouter()
     return (
         <View
-            className='pb-12'
+            className='pb-4'
         >
             <View
                 className='px-2 py-2 flex-row justify-between'

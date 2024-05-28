@@ -33,7 +33,7 @@ export default function HeroArea() {
                 data={items}
                 scrollAnimationDuration={1000}
                 autoPlayInterval={5000}
-                onSnapToItem={(index) => console.log('current index:', index)}
+                onSnapToItem={(index) => {}}
                 renderItem={({ item, index }) => (
                     <View
                         className='h-[130px] flex-row bg-white rounded-md'
