@@ -1,18 +1,24 @@
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { useRouter } from 'expo-router'
+import * as Constant from 'expo-constants'
 
-export default function SignUp() {
-  const router = useRouter()
+export default function ApplyDoctor() {
   return (
     <View
-      className='flex-1 bg-blue-100 pt-[80px] px-4'
+        className='flex-1 bg-blue-100 px-2'
+        style={{
+            paddingTop : Constant.default.statusBarHeight
+        }}
     >
-      <Text
-        className='text-3xl font-pbold'
+        <View
+            className='pt-5'
+        >
+            <Text
+        className='text-xl font-pmedium'
       >
-        SignUp
+        Create a doctor account
       </Text>
+        </View>
+        
       <View
         className='mt-5 space-y-4'
       >
@@ -74,30 +80,10 @@ export default function SignUp() {
           <Text
             className='text-white text-center'
           >
-            Sign Up
+            Create service account
           </Text>
         </TouchableOpacity>
       </View>
-      <View
-        className='pt-10'
-      >
-        <Text
-          className=' text-center font-hbold text-blue-500'
-        >
-          Already Have an account ?
-        </Text>
-        <TouchableOpacity
-          onPress={() => router.push('signin')}
-          className='py-2.5 bg-white border-[1.2px] border-blue-500 rounded-full'
-        >
-          <Text
-            className='text-blue-500 text-center'
-          >
-            Sign In
-          </Text>
-        </TouchableOpacity>
-      </View>
-
     </View>
   )
 }

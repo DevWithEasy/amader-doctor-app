@@ -130,7 +130,7 @@ export default function Index() {
                             </View>
                             <TouchableOpacity
                                 className='py-2 bg-blue-500 rounded'
-                                onPress={()=>router.push('/signup')}
+                                onPress={()=>router.push('/doctor/1/')}
                             >
                                 <Text
                                     className='text-white text-center'

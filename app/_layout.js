@@ -42,6 +42,13 @@ export default function RootLayout() {
                 }}
             />
             <Stack.Screen
+                name='apply_doctor'
+                options={{
+                    headerShown: false,
+                    title: 'Apply as doctor'
+                }}
+            />
+            <Stack.Screen
                 name='blood'
                 options={{
                     // headerShown: false
@@ -68,11 +75,17 @@ export default function RootLayout() {
             <Stack.Screen
                 name='signin'
                 options={{
-                    // headerShown: false
+                    headerShown: false
                 }}
             />
             <Stack.Screen
                 name='signup'
+                options={{
+                    headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='user/[id]'
                 options={{
                     headerShown: false
                 }}
