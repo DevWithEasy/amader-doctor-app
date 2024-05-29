@@ -4,6 +4,8 @@ import { Link, useGlobalSearchParams, useNavigation, useRouter } from 'expo-rout
 import axios from 'axios'
 import { toBengaliNumber } from 'bengali-number'
 import API_URL from '../../utils/api_url'
+import find_image_url from '../../utils/find_image_url'
+import Doctor from '../../components/Doctor'
 
 export default function Specialization() {
   const router = useRouter()
@@ -32,7 +34,7 @@ export default function Specialization() {
   useEffect(() => {
     getDoctors(id)
   }, [id])
-  
+  console.log(doctors)
   return (
     <View
       className='flex-1 bg-blue-50 p-2'
@@ -49,60 +51,10 @@ export default function Specialization() {
       <FlatList
         data={doctors}
         renderItem={({item}) =>
-          <Link
-            key={item?._id}
-            href={`/doctors/${item?._id}`}
-            // onPress={() => router.push(`/doctors/${item?._id}`)}
-            className='w-full flex-row p-2 bg-white rounded relative cursor-pointer hover:bg-blue-500'
-          >
-            <View
-              className='w-[90px] justify-center items-center space-y-1'
-            >
-              <Image
-                source={{ uri: `${API_URL}${item?.user?.image?.url}` }}
-                className='h-[80px] w-[80px]'
-              />
-              <Text
-                className='font-hregular bg-blue-50 px-2 text-blue-600 rounded-md'
-              >
-                {toBengaliNumber(item?.feesPerConsultation)}-৳
-              </Text>
-            </View>
-
-            <View
-              className='pl-4'
-            >
-              <Text
-                className='text-blue-500 font-hbold'
-              >
-                {item?.name}
-              </Text>
-              <Text
-                className='font-hregular'
-              >
-                {item?.experienceArea}
-              </Text>
-              <Text
-                className='font-hregular'
-              >
-                {item?.workedAt}
-              </Text>
-              <Text
-                className='font-hregular'
-              >
-                {toBengaliNumber(item?.experience)}+ বছরের অভিজ্ঞতা
-              </Text>
-            </View>
-            <TouchableOpacity
-              className='absolute right-0.5 top-0.5 bg-green-100 rounded px-2'
-            >
-              <Text
-                className='font-hregular text-green-500 text-center'
-              >
-                {item?.specialization?.name}
-              </Text>
-            </TouchableOpacity>
-          </Link>
+          <Doctor
+            key={item._id}
+            doctor = {item}
+          />
         }
         keyExtractor={doctor => doctor._id}
       />
