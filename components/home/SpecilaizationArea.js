@@ -29,7 +29,7 @@ export default function SpecilaizationArea({ specilaizations }) {
                     specilaizations.map(specilaization =>
                         <TouchableOpacity
                             key={specilaization?._id}
-                            onPress={() => router.push(`/specializations/${specilaization?._id}`)}
+                            onPress={() => router.push(`/specializations/${specilaization?._id}?name=${specilaization.name}`)}
                             className='w-4/12 p-1'
                         >
                             <View

@@ -79,6 +79,20 @@ export default function RootLayout() {
                 }}
             />
             <Stack.Screen
+                name='specializations/index'
+                options={{
+                    title: 'বিভাগীয় (ডাক্তার)'
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='specializations/[id]'
+                options={{
+                    title: 'বিভাগীয় (ডাক্তার)'
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
                 name='signin'
                 options={{
                     headerShown: false

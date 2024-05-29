@@ -39,7 +39,7 @@ export default function HeroArea() {
                         className='h-[130px] flex-row bg-white rounded-md'
                     >
                         <View
-                            className='w-7/12 p-2 space-y-2'
+                            className='w-7/12 p-2 space-y-2 overflow-hidden'
                         >
                             <Text
                                 className='text-[16px] font-hmedium text-blue-500'
