@@ -21,7 +21,7 @@ export default function Specializations() {
   useEffect(() => {
     getAllSpecialist()
   }, [])
-  console.log(API_URL)
+  
   return (
     <View
       className='flex-1 bg-blue-50 p-1'
