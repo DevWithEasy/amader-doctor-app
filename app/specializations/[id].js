@@ -1,10 +1,9 @@
-import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native'
+import { View, Text,  FlatList } from 'react-native'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Link, useGlobalSearchParams, useNavigation, useRouter } from 'expo-router'
 import axios from 'axios'
 import { toBengaliNumber } from 'bengali-number'
 import API_URL from '../../utils/api_url'
-import find_image_url from '../../utils/find_image_url'
 import Doctor from '../../components/Doctor'
 
 export default function Specialization() {

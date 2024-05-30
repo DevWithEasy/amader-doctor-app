@@ -1,6 +1,6 @@
 import { View, Text, useWindowDimensions, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useGlobalSearchParams } from 'expo-router'
+import { useGlobalSearchParams, useRouter } from 'expo-router'
 import axios from 'axios'
 import API_URL from '../../utils/api_url'
 import RenderHtml from 'react-native-render-html';
@@ -12,7 +12,7 @@ import getVanueTypeBangla from '../../utils/vanueTypeBangla'
 import Doctor from '../../components/Doctor'
 
 export default function DoctorDetails() {
-  const { width } = useWindowDimensions();
+  const router = useRouter()
   const { id } = useGlobalSearchParams()
   const [doctor, setDoctor] = useState([])
   const [doctors, setDoctors] = useState([])
@@ -98,8 +98,9 @@ export default function DoctorDetails() {
           >
             {doctor?.chambers &&
               doctor?.chambers.map(chamber =>
-                <View
+                <TouchableOpacity
                   key={chamber._id}
+                  onPress={()=>router.push('/doctors/new_appointment')}
                   className='p-2 border-[0.5px] border-gray-400 rounded'
                 >
                   <Text
@@ -126,7 +127,7 @@ export default function DoctorDetails() {
                       {getVanueTypeBangla(chamber.vanue.type)}
                     </Text>
                   </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
               )
             }
           </View>
