@@ -4,18 +4,23 @@ import { useGlobalSearchParams, useRouter } from 'expo-router'
 import axios from 'axios'
 import API_URL from '../../utils/api_url'
 import RenderHtml from 'react-native-render-html';
-import { toBengaliNumber, toBengaliWord } from 'bengali-number'
+import { toBengaliNumber } from 'bengali-number'
 import find_image_url from '../../utils/find_image_url'
 import dayNameBangla from '../../utils/dayNameBangla'
 import formatTime from '../../utils/formatTime'
 import getVanueTypeBangla from '../../utils/vanueTypeBangla'
-import Doctor from '../../components/Doctor'
+import Doctor from '../../components/doctor-list-item'
+import SelectChamber from '../../components/appointment/select-chamber'
+import CreateAppointment from '../../components/appointment/create-appointment'
 
 export default function DoctorDetails() {
   const router = useRouter()
   const { id } = useGlobalSearchParams()
   const [doctor, setDoctor] = useState([])
   const [doctors, setDoctors] = useState([])
+  const [selectChamber, setSelectChamber] = useState()
+  const [selectView, setSelectView] = useState(false)
+  const [createView, setCreateView] = useState(false)
   async function getDoctor(id) {
     try {
       const res = await axios.get(`${API_URL}/api/doctor/${id}`)
@@ -30,7 +35,7 @@ export default function DoctorDetails() {
   useEffect(() => {
     getDoctor(id)
   }, [id])
-  console.log(doctor?.chambers)
+
   return (
     <ScrollView
       className='bg-white flex-1'
@@ -46,13 +51,13 @@ export default function DoctorDetails() {
         }
       </View>
       <View
-        className='p-2 space-y-3'
+        className='p-4 space-y-3'
       >
         <View
           className='pt-2'
         >
           <Text
-            className='font-hbold text-xl'
+            className='font-hsemibold text-xl'
           >
             {doctor?.name}
           </Text>
@@ -86,6 +91,16 @@ export default function DoctorDetails() {
               {toBengaliNumber(doctor?.feesPerConsultation)}
             </Text> টাকা
           </Text>
+          <TouchableOpacity
+            onPress={() => setSelectView(true)}
+            className='w-40 px-2 pb-2 pt-3 bg-blue-500 rounded-md'
+          >
+            <Text
+              className='font-hregular text-white text-center'
+            >
+              অ্যাপয়েন্টমেন্ট নিন
+            </Text>
+          </TouchableOpacity>
         </View>
         <View>
           <Text
@@ -93,44 +108,57 @@ export default function DoctorDetails() {
           >
             চেম্বার সমূহঃ
           </Text>
-          <View
-            className='space-y-1'
-          >
-            {doctor?.chambers &&
-              doctor?.chambers.map(chamber =>
-                <TouchableOpacity
-                  key={chamber._id}
-                  onPress={()=>router.push('/doctors/new_appointment')}
-                  className='p-2 border-[0.5px] border-gray-400 rounded'
-                >
-                  <Text
-                    className='mb-0.5 font-hmedium text-blue-500'
-                  >
-                    {chamber.vanue.name}
-                  </Text>
-                  <Text
-                    className='font-hregular'
-                  >
-                    {chamber.vanue.location}
-                  </Text>
-                  <Text
-                    className='font-hregular'
-                  >
-                    {dayNameBangla(chamber.day)}, {formatTime(chamber.from)} থেকে {formatTime(chamber.to)}
-                  </Text>
+          {doctor?.chambers?.length > 0 ?
+            <View
+              className='space-y-2'
+            >
+              {
+                doctor?.chambers.map(chamber =>
                   <TouchableOpacity
-                    className='px-1 absolute right-0 bg-blue-50 rounded-bl-md'
+                    key={chamber._id}
+                    onPress={() => {
+                      setSelectChamber(chamber)
+                      setCreateView(true)
+                    }}
+                    className={`p-2 rounded ${chamber._id === selectChamber?._id ? 'border border-red-500' : 'border-[0.5px] border-gray-400'}`}
                   >
                     <Text
-                      className='pt-0.5 text-blue-500 text-xs font-hregular'
+                      className='mb-0.5 font-hmedium text-blue-500'
                     >
-                      {getVanueTypeBangla(chamber.vanue.type)}
+                      {chamber.vanue.name}
                     </Text>
+                    <Text
+                      className='font-hregular'
+                    >
+                      {chamber.vanue.location}
+                    </Text>
+                    <Text
+                      className='font-hregular'
+                    >
+                      {dayNameBangla(chamber.day)}, {formatTime(chamber.from)} থেকে {formatTime(chamber.to)}
+                    </Text>
+                    <TouchableOpacity
+                      className='px-1 absolute right-1 top-1 bg-blue-50 rounded-bl-md'
+                    >
+                      <Text
+                        className='pt-0.5 text-blue-500 text-xs font-hregular'
+                      >
+                        {getVanueTypeBangla(chamber.vanue.type)}
+                      </Text>
+                    </TouchableOpacity>
                   </TouchableOpacity>
-                </TouchableOpacity>
-              )
-            }
-          </View>
+                )
+              }
+
+            </View>
+            :
+            <Text
+              className='text-center text-sm font-hregular text-gray-400'
+            >
+              এখনো কোন চেম্বার যোগ করেন নি।
+            </Text>
+          }
+
         </View>
         <View>
           <Text
@@ -152,14 +180,30 @@ export default function DoctorDetails() {
               </View>
               :
               <Text
-                className='mt-5 text-center text-sm font-hregular text-red-400'
+                className='mt-5 text-center text-sm font-hregular text-gray-400'
               >
                 কোন ডাক্তার খুজে পাওয়া যায়নি।
-                </Text>
+              </Text>
           }
 
         </View>
-
+        {
+          selectView &&
+          <SelectChamber {...{
+            view: selectView,
+            setView: setSelectView,
+            chambers: doctor.chambers,
+            setChamber: setSelectChamber,
+            setCreateView: setCreateView
+          }} />
+        }
+        {
+          createView &&
+          <CreateAppointment {...{
+            view: createView,
+            setView: setCreateView
+          }} />
+        }
 
         {/* {doctor._id &&
         <RenderHtml

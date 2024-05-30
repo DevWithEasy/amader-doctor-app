@@ -4,7 +4,7 @@ import { Link, useGlobalSearchParams, useNavigation, useRouter } from 'expo-rout
 import axios from 'axios'
 import { toBengaliNumber } from 'bengali-number'
 import API_URL from '../../utils/api_url'
-import Doctor from '../../components/Doctor'
+import Doctor from '../../components/doctor-list-item'
 
 export default function Specialization() {
   const router = useRouter()

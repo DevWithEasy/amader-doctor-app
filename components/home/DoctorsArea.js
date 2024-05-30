@@ -4,7 +4,7 @@ import { toBengaliNumber } from 'bengali-number'
 import { Link, useRouter } from 'expo-router'
 import API_URL from '../../utils/api_url'
 import find_image_url from '../../utils/find_image_url'
-import Doctor from '../Doctor'
+import Doctor from '../doctor-list-item'
 
 export default function DoctorsArea({ doctors }) {
     const router = useRouter()
