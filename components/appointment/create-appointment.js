@@ -1,6 +1,7 @@
 import { View, Text, Modal, TouchableOpacity, TextInput } from 'react-native'
 import React from 'react'
 import AntDesign from '@expo/vector-icons/AntDesign';
+import CalendarPicker from "react-native-calendar-picker";
 
 export default function CreateAppointment({ view, setView }) {
     return (
@@ -43,6 +44,16 @@ export default function CreateAppointment({ view, setView }) {
                                     className='font-hregular'
                                 >
                                     বয়সঃ
+                                </Text>
+                                <TextInput
+                                    className='p-2 border border-gray-500 rounded-md'
+                                />
+                            </View>
+                            <View>
+                                <Text
+                                    className='font-hregular'
+                                >
+                                    লিঙ্গঃ
                                 </Text>
                                 <TextInput
                                     className='p-2 border border-gray-500 rounded-md'
