@@ -51,7 +51,7 @@ export default function DoctorDetails() {
         }
       </View>
       <View
-        className='p-4 space-y-3'
+        className='p-4 space-y-5'
       >
         <View
           className='pt-2'
