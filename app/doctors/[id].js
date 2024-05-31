@@ -118,7 +118,8 @@ export default function DoctorDetails() {
                     key={chamber._id}
                     onPress={() => {
                       setSelectChamber(chamber)
-                      setCreateView(true)
+                      // setCreateView(true)
+                      router.push('/doctors/new_appointment')
                     }}
                     className={`p-2 rounded ${chamber._id === selectChamber?._id ? 'border border-red-500' : 'border-[0.5px] border-gray-400'}`}
                   >

@@ -6,6 +6,7 @@ import getVanueTypeBangla from '../../utils/vanueTypeBangla';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function SelectChamber({ chambers, view, setView, setChamber, setCreateView }) {
+    
     return (
         <View
             className='flex-1'

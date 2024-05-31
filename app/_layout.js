@@ -67,6 +67,13 @@ export default function RootLayout() {
                 }}
             />
             <Stack.Screen
+                name='doctors/new_appointment'
+                options={{
+                    title: 'নতুন অ্যাপয়েন্টমেন্ট'
+                    // headerShown: false
+                }}
+            />
+            <Stack.Screen
                 name='find'
                 options={{
                     // headerShown: false
