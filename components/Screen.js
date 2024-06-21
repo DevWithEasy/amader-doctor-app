@@ -1,8 +1,9 @@
 import { View, Text, SafeAreaView, Platform } from 'react-native'
 import React from 'react'
 import * as Constant from 'expo-constants'
+import { AntDesign } from '@expo/vector-icons';
 
-export default function Screen({color = 'white',children}) {
+export default function Screen({header=true,color = 'white',children}) {
   return (
     <SafeAreaView
         style={{
@@ -11,6 +12,11 @@ export default function Screen({color = 'white',children}) {
             backgroundColor : color
         }}
     >
+      <View
+        className
+      >
+        <AntDesign name="menu-fold" size={24} color="black" />
+      </View>
       {children}
     </SafeAreaView>
   )
